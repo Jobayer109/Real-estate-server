@@ -12,12 +12,9 @@ app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 
-// app.get("/", (req, res) => {
-//   res.send("Hello from server");
-// });
-
 app.listen(port, () => {
   console.log(`Server running on http//:localhost:${port}`);
 });
 
+// Routes
 app.use("/api/user", userRoute);
