@@ -12,25 +12,25 @@ model User {
     name             String?
     email            String      @unique
     image            String?
-    bookedvisit      Json[]
+    bookedVisits     Json[]
     favResidenciesID String[]    @db.ObjectId
-    ownedResidencies Residency[] @relation("owner")
+    ownedResidencies Residency[] @relation("Owner")
 }
 
 model Residency {
     id          String   @id @default(auto()) @map("_id") @db.ObjectId
     title       String
     description String
-    price       String
+    price       String?
     address     String
     city        String
     country     String
     image       String
     facilities  Json
     userEmail   String
-    owner       User     @relation("owner", fields: [userEmail], references: [email])
+    owner       User     @relation("Owner", fields: [userEmail], references: [email])
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
 
-    @@unique(fields: [userEmail, address])
+    @@unique(fields: [address, userEmail])
 }
